@@ -1,10 +1,8 @@
-
-
 import pandas as pd
 import re
 import os
 
-folder_path = r'C:\Users\sakura\Desktop\new guba' 
+folder_path = r'C:\User\Desktop\new guba' 
 df_dic = {}
 
 
@@ -84,10 +82,6 @@ for name,df in df_dic.items():
   df = df.apply(adjust_date,axis =1)
   df['date'] = pd.to_datetime(df['date'])
   df= df.sort_values(by='date').reset_index(drop=True)
-  # date_str = "2024-09-02"
-  # date_dt = pd.to_datetime(date_str)
-  # if df.iloc[0]["date"] != date_dt:
-  #     print(name)
   sentiment_pipeline = pipeline('sentiment-analysis', model=model, tokenizer=tokenizer)
 
 
