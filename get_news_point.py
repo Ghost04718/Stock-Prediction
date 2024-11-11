@@ -1,10 +1,8 @@
-
-
 import pandas as pd
 import re
 import os
 
-folder_path =  r'C:\Users\sakura\Desktop\news'  # 替换为实际文件夹名
+folder_path =  r'C:\User\Desktop\news'  # 替换为实际文件夹名
 df_dic = {}
 
 for root, dirs, files in os.walk(folder_path):
@@ -63,11 +61,6 @@ def adjust_date(row):
 
     next_trading_day = trading_days[trading_days > date]
 
-    # if time_obj >= datetime.strptime('15:00', '%H:%M'):
-    #     if not next_trading_day.empty:
-    #         row['date'] = next_trading_day[0].date()
-    #         row['time'] = '00:00'
-
     if pd.to_datetime(row['date']) in weekends:
         if not next_trading_day.empty:
             row['date'] = next_trading_day[0].date()
@@ -79,10 +72,6 @@ for name,df in df_dic.items():
   df = df.apply(adjust_date,axis =1)
   df['date'] = pd.to_datetime(df['date'])
   df= df.sort_values(by='date').reset_index(drop=True)
-  # date_str = "2024-09-02"
-  # date_dt = pd.to_datetime(date_str)
-  # if df.iloc[0]["date"] != date_dt:
-  #     print(name)
   sentiment_pipeline = pipeline('sentiment-analysis', model=model, tokenizer=tokenizer)
 
 
